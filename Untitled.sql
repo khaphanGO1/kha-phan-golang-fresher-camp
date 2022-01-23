@@ -77,6 +77,22 @@ CREATE TABLE `Favorites_Foods` (
   `food_id` int
 );
 
+CREATE TABLE `Review_Restaurants` (
+  `user_id` int,
+  `restaurant_id` int,
+  `content` varchar(255),
+  `created at` timestamp,
+  `update at` timestamp
+);
+
+CREATE TABLE `Review_Foods` (
+  `user_id` int,
+  `food_id` int,
+  `content` varchar(255),
+  `created at` timestamp,
+  `update at` timestamp
+);
+
 ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Foods` (`restaurant_id`);
 
 ALTER TABLE `orders` ADD FOREIGN KEY (`id`) REFERENCES `order_foods` (`order_id`);
@@ -102,4 +118,12 @@ ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Foods` (`user_i
 ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Restaurants` (`restaurant_id`);
 
 ALTER TABLE `Foods` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Foods` (`food_id`);
+
+ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Review_Foods` (`user_id`);
+
+ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Review_Restaurants` (`user_id`);
+
+ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Review_Restaurants` (`restaurant_id`);
+
+ALTER TABLE `Foods` ADD FOREIGN KEY (`id`) REFERENCES `Review_Foods` (`food_id`);
 
