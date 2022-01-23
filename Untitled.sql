@@ -32,6 +32,7 @@ CREATE TABLE `users` (
   `email` varchar(255),
   `adress_id` int,
   `phone number` varchar(255),
+  `roll` int,
   `created at` timestamp,
   `update at` timestamp
 );
