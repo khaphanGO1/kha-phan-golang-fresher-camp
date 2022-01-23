@@ -39,7 +39,8 @@ CREATE TABLE `order` (
   `id` int PRIMARY KEY,
   `user_id` int UNIQUE NOT NULL,
   `status` varchar(255),
-  `created_at` varchar(255) COMMENT 'When order created'
+  `created at` timestamp,
+  `update at` timestamp
 );
 
 CREATE TABLE `order_foods` (
@@ -50,7 +51,9 @@ CREATE TABLE `order_foods` (
 
 CREATE TABLE `Restaurants_Categories` (
   `restaurant_id` int,
-  `categorie_id` int
+  `categorie_id` int,
+  `created at` timestamp,
+  `update at` timestamp
 );
 
 ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Foods` (`restaurant_id`);
