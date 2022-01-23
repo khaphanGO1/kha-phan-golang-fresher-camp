@@ -8,7 +8,7 @@ CREATE TABLE `Foods` (
   `description` varchar(255),
   `created at` timestamp,
   `update at` timestamp,
-  PRIMARY KEY (`id`, `restaurant_id`)
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Restaurants` (
