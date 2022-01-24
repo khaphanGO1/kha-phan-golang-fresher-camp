@@ -5,26 +5,32 @@ import (
 	"time"
 )
 
-func crawl(i int, c chan int, j int) {
-	c <- i
-	fmt.Println(<-c, j)
+func crawl(worker int, c chan int) {
+	for i := range c {
+		fmt.Printf("Worker %v crawled url %v\n", worker, i)
+	}
 
 }
 
 func main() {
-	c := make(chan int, 5)
-	s := make([]int, 1000)
-	for i := 0; i < 1000; i++ {
-		s[i] = i + 1
+	const nWorker = 6
+	const nURL = 1000
+	arrURL := make([]int, nURL)
+
+	for i1 := 0; i1 < nURL; i1++ {
+		arrURL[i1] = i1
 	}
-	j := 1
-	for i := 0; i < 1000; i++ {
-		if j > 5 {
-			j = 1
-		}
-		time.Sleep(100 * time.Millisecond)
-		go crawl(i, c, j)
-		j++
+
+	c := make(chan int, nWorker)
+	defer close(c)
+
+	for i2 := 1; i2 < nWorker; i2++ {
+		go crawl(i2, c)
+	}
+
+	for i3 := 0; i3 < nURL; i3++ {
+		time.Sleep(1000 * time.Millisecond)
+		c <- arrURL[i3]
 	}
 
 }
