@@ -107,3 +107,5 @@ ALTER TABLE `Favorites_Foods` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`i
 
 ALTER TABLE `Favorites_Foods` ADD FOREIGN KEY (`food_id`) REFERENCES `Foods` (`id`);
 
+ALTER TABLE `Foods` ADD FOREIGN KEY (`categorie_id`) REFERENCES `Categories` (`id`);
+
