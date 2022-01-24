@@ -1,5 +1,5 @@
 CREATE TABLE `Foods` (
-  `id` int AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `restaurant_id` int,
   `name` varchar(255),
   `price` int,
@@ -7,8 +7,7 @@ CREATE TABLE `Foods` (
   `categorie_id` int,
   `description` varchar(255),
   `created at` timestamp,
-  `update at` timestamp,
-  PRIMARY KEY (`id`)
+  `update at` timestamp
 );
 
 CREATE TABLE `Restaurants` (
@@ -32,7 +31,6 @@ CREATE TABLE `users` (
   `email` varchar(255),
   `adress_id` int,
   `phone number` varchar(255),
-  `roll` int,
   `created at` timestamp,
   `update at` timestamp
 );
@@ -48,20 +46,23 @@ CREATE TABLE `orders` (
 CREATE TABLE `order_foods` (
   `order_id` int,
   `food_id` int,
-  `quantity` int DEFAULT 1
+  `quantity` int DEFAULT 1,
+  PRIMARY KEY (`order_id`, `food_id`)
 );
 
 CREATE TABLE `Restaurants_Categories` (
   `restaurant_id` int,
   `categorie_id` int,
   `created at` timestamp,
-  `update at` timestamp
+  `update at` timestamp,
+  PRIMARY KEY (`restaurant_id`, `categorie_id`)
 );
 
 CREATE TABLE `Adresses` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `full_name` varchar(255),
   `phone number` varchar(255),
+  `roll` int,
   `state` varchar(255),
   `city` varchar(255),
   `street` varchar(255),
@@ -70,28 +71,16 @@ CREATE TABLE `Adresses` (
 
 CREATE TABLE `Favorites_Restaurants` (
   `user_id` int,
-  `restaurant_id` int
+  `restaurant_id` int,
+  `created at` timestamp,
+  PRIMARY KEY (`user_id`, `restaurant_id`)
 );
 
 CREATE TABLE `Favorites_Foods` (
   `user_id` int,
-  `food_id` int
-);
-
-CREATE TABLE `Review_Restaurants` (
-  `user_id` int,
-  `restaurant_id` int,
-  `content` varchar(255),
-  `created at` timestamp,
-  `update at` timestamp
-);
-
-CREATE TABLE `Review_Foods` (
-  `user_id` int,
   `food_id` int,
-  `content` varchar(255),
   `created at` timestamp,
-  `update at` timestamp
+  PRIMARY KEY (`user_id`, `food_id`)
 );
 
 ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Foods` (`restaurant_id`);
@@ -119,12 +108,4 @@ ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Foods` (`user_i
 ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Restaurants` (`restaurant_id`);
 
 ALTER TABLE `Foods` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Foods` (`food_id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Review_Foods` (`user_id`);
-
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Review_Restaurants` (`user_id`);
-
-ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Review_Restaurants` (`restaurant_id`);
-
-ALTER TABLE `Foods` ADD FOREIGN KEY (`id`) REFERENCES `Review_Foods` (`food_id`);
 
