@@ -83,29 +83,27 @@ CREATE TABLE `Favorites_Foods` (
   PRIMARY KEY (`user_id`, `food_id`)
 );
 
-ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Foods` (`restaurant_id`);
+ALTER TABLE `Foods` ADD FOREIGN KEY (`restaurant_id`) REFERENCES `Restaurants` (`id`);
 
-ALTER TABLE `orders` ADD FOREIGN KEY (`id`) REFERENCES `order_foods` (`order_id`);
+ALTER TABLE `Restaurants_Categories` ADD FOREIGN KEY (`restaurant_id`) REFERENCES `Restaurants` (`id`);
 
-ALTER TABLE `Foods` ADD FOREIGN KEY (`id`) REFERENCES `order_foods` (`food_id`);
+ALTER TABLE `Favorites_Restaurants` ADD FOREIGN KEY (`restaurant_id`) REFERENCES `Restaurants` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `orders` (`user_id`);
+ALTER TABLE `Restaurants_Categories` ADD FOREIGN KEY (`categorie_id`) REFERENCES `Categories` (`id`);
 
-ALTER TABLE `Foods` ADD FOREIGN KEY (`categorie_id`) REFERENCES `Categories` (`id`);
+ALTER TABLE `order_foods` ADD FOREIGN KEY (`food_id`) REFERENCES `Foods` (`id`);
 
-ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Restaurants_Categories` (`restaurant_id`);
+ALTER TABLE `order_foods` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
-ALTER TABLE `Categories` ADD FOREIGN KEY (`id`) REFERENCES `Restaurants_Categories` (`categorie_id`);
+ALTER TABLE `orders` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `Adresses` ADD FOREIGN KEY (`id`) REFERENCES `Restaurants` (`adress_id`);
+ALTER TABLE `users` ADD FOREIGN KEY (`adress_id`) REFERENCES `Adresses` (`id`);
 
-ALTER TABLE `Adresses` ADD FOREIGN KEY (`id`) REFERENCES `users` (`adress_id`);
+ALTER TABLE `Restaurants` ADD FOREIGN KEY (`adress_id`) REFERENCES `Adresses` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Restaurants` (`user_id`);
+ALTER TABLE `Favorites_Restaurants` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Foods` (`user_id`);
+ALTER TABLE `Favorites_Foods` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `Restaurants` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Restaurants` (`restaurant_id`);
-
-ALTER TABLE `Foods` ADD FOREIGN KEY (`id`) REFERENCES `Favorites_Foods` (`food_id`);
+ALTER TABLE `Favorites_Foods` ADD FOREIGN KEY (`food_id`) REFERENCES `Foods` (`id`);
 
