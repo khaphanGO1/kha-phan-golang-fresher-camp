@@ -1,0 +1,3 @@
+- What is the use of the index in the DB table? If there is no index, what is the difference in the query?
+A SQL index is a quick lookup table for finding records users need to search frequently. An index is small, fast, and optimized for quick lookups. It is very useful for connecting the relational tables and searching large tables.
+If there is no Index for the  column, the query will have to run through all the Rows of the table to compare and retrieve the matching Rows. So when the number of records is large, it do more work
